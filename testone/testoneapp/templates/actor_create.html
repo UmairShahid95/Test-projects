@@ -1,0 +1,13 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+
+<h2>Create awesome new actor</h2>
+<form action= {% url 'testoneapp:actor_create'%} method="post" enctype="multipart/form-data">
+{% csrf_token %}
+<input type="submit" value="Create" />
+    {{form}}
+</form>
+
+{% endblock content %}
+

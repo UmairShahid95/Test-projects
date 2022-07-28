@@ -1,0 +1,35 @@
+{%load static%}
+
+<html>
+<head>
+<meta charset= "utf-8">
+<title>Actors</title>
+<link rel="stylesheet" href="{%static 'style.css'%}">
+</head>
+<body>
+    <h1><a href="{% url 'home' %}"><img src="{% static 'testlogo.jpg' %}"></a></h1>
+    <nav>
+        <ul>
+            {% if user.is_authenticated %}
+            <li><form action= {% url 'signup:logout' %} method="post">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form></li>
+            <li><a href="{% url 'testoneapp:actor_create' %}">Create Article</a></li>
+            {% else %}
+            <li><a href="{% url 'signup:login' %}">Login</a></li>
+            <li><a href=" {% url 'signup:signup'%}">Signup</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    <h1>Actors</h1>
+    <div class="wrapper">
+    {% block content %}
+    {% endblock%}
+
+</div>
+
+</body>
+
+
+</html>

@@ -1,0 +1,15 @@
+{%extends 'base_template.html'%}
+{% block content %}
+<div class= "actors">
+ {% for actor in actor_list %}
+    <div class actordata>
+        <h2><a href="{% url 'testoneapp:actor_description' actor.slug %}">{{actor.actorname}}</a></h2>
+        <h2>
+            {{actor.actor_email}}    </h2>
+           <h2>{{actor.snippet}}</h2>
+
+
+    </div>
+ {% endfor %}
+</div>
+{% endblock %}

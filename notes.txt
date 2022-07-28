@@ -1,0 +1,66 @@
+For a new Project: 
+    1. Create a new environment and install django: pipenv install django
+    2. Activate the environment using : pipenv shell
+    3. Type the command 'django-admin' to see if the environment is installed.
+    4. To make a new project, type the command "django-admin startproject (projectname)"
+         To make the project in the current directory, put a "." after the project name
+    5. To run the project type : python ./mangage.py runserver (PORT)
+        If the PORT is not specified, the default port is used (8000). 
+    6. A warning sign saying that the project has unapplied migrations, to resolve this, use:
+                        python ./mangage.py migrate
+    
+    7. To crate an app for the current project, use : python ./mangage.py statapp (appname)
+            This will create a new directory with the app name. 
+        */ You need to add the app in the settings.py file of the project in the section of INSTALLED APPS
+    8. Change the python interpreter to the path of the environment, to find out the path of the environment use:
+            pipenv --venv
+    9. Type CTRL+SHIFT+P to open the command pallete and change the interpreter by provided the path of the env. 
+
+    10. After creating a new model, you have to migrate it, for that 
+    you have to create a migration file. 
+            python  ./mangage.py makemigrations ->  this creates the migrations file. 
+
+    11. Django adds the id. field in the model itself. 
+    12. After that, run the command in p.6 again and that will migrate the model successfully. 
+
+    13. ORM bridges the gap between the code and the database. retrieve model etc. 
+
+    #### Example of saving and retrieving data form the django project database  #####
+        -- suppose you have a model called Articles
+        -- if you want to get the articles from the database, you first need to start a shell in the project: 
+            for that : python   ./mangage.py shell (also used to activate the environment)
+                import the Articles objects from the project
+        Articles.objects.all() will print out the Articles table (a model is essentially a table)        
+        -- lets suppose that the Articles model has the follwing attributes:
+                        -- title
+                        -- description
+        To add data in to the articles database, do the following in the shell (can also be done via admin, shown later)
+         article = Articles()
+         article.title = "Hello, world"
+         article.description = "description of the article"
+         article.save()
+        To retrieve an article title and description with index 0 from the articles database: 
+        Articles.objects.all()[0].title
+        Articles.objects.all()[0].description
+
+        POINT: Articles.objects.all() will print out a list of article objects in the database without showing the attributes. 
+        To control how the model is represented in the ORM, we can use the builtin __str__(self) function, eg. to
+        represent the Articles by their title in the Articles.objects.all(), this function should be: 
+                            __str__(self):
+                                return self.title --> This function should be in the Articles class.
+        
+        Now, Articles.objects.all() will print out a list of article titles in the database. 
+
+        ##### Django Admin ###
+        TO initialize django admin, you first need to create a superuser which will have access to /admin area:
+        To initialize the superuser: 
+                python  ./mangage.py createsuperuser
+        The prompt will ask for username, email and password. you can leave the email empty
+        we need to register our models in the admin.py file if we want to access them in the admin area
+        To do that, do the following in the admin.py file: 
+                from .models import modelName 
+
+                admin.site.register(modelName)
+
+        
+

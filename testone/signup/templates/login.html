@@ -1,0 +1,22 @@
+{% extends 'base_template.html' %}
+
+{% block content %}
+
+
+<h2>Login Form</h2>
+<form action="{% url 'signup:login' %}" method="POST">
+{% if request.GET.next %}
+<input type="hidden" name="next" value={{request.GET.next}} />
+
+{% endif %}
+
+    {% csrf_token %}
+{{form}}
+<input type="submit" value="Login" />
+</form>
+
+{% endblock content %}
+
+
+
+
